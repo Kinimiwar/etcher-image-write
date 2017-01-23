@@ -30,9 +30,7 @@ const runImageTest = (directory) => {
   const expected = path.join(directory, 'expected');
   const output = path.join(directory, 'output');
 
-  const checksum = fs.readFileSync(path.join(directory, 'checksum'), {
-    encoding: 'utf8'
-  }).trim();
+  const checksum = require(path.join(directory, 'checksum.json'));
 
   const transform = fs.readFileSync(path.join(directory, 'transform'), {
     encoding: 'utf8'
@@ -57,7 +55,8 @@ const runImageTest = (directory) => {
         size: fs.statSync(data.input).size
       }, {
         check: true,
-        transform: transforms[transform] || new PassThroughStream()
+        transform: transforms[transform] || new PassThroughStream(),
+        checksumAlgorithms: [ 'crc32', 'md5', 'sha1' ]
       });
 
       writer.on('error', reject);
@@ -65,7 +64,7 @@ const runImageTest = (directory) => {
     }).tap(() => {
       return fs.closeAsync(outputFileDescriptor);
     }).then((results) => {
-      m.chai.expect(results.sourceChecksum).to.equal(checksum);
+      m.chai.expect(results.sourceChecksum).to.deep.equal(checksum);
 
       return Bluebird.props({
         expected: fs.readFileAsync(expected),
