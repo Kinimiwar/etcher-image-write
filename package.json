@@ -3,10 +3,10 @@
   "version": "9.1.2-mod.2",
   "description": "The cross-platform way to stream an OS image to a device",
   "main": "lib/index.js",
-  "homepage": "https://github.com/resin-io-modules/etcher-image-write",
+  "homepage": "https://github.com/pine64dev/etcher-image-write",
   "repository": {
     "type": "git",
-    "url": "git://github.com/resin-io-modules/etcher-image-write.git"
+    "url": "git://github.com/pine64dev/etcher-image-write.git"
   },
   "bin": {
     "etcher-image-write": "./bin/cli.js"
@@ -32,7 +32,7 @@
     "version": "npm run changelog && git add CHANGELOG.md",
     "changelog": "versionist"
   },
-  "author": "Juan Cruz Viotti <juan@resin.io>",
+  "author": "Juan Cruz Viotti <juan@resin.io>, PINE64 Developer <developer@pine64.org>",
   "license": "Apache-2.0",
   "devDependencies": {
     "electron-mocha": "^3.3.0",
